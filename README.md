@@ -15,7 +15,7 @@ All results are streamed live to a React monitoring dashboard through persistent
 ---
 SYSTEM ARCHITECTURE
   
-![RepoGuard Architecture](./assets/architecture.png)
+![RepoGuard Architecture](./architecture.png)
 
 # ⚡ Core Features
 
