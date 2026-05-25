@@ -15,49 +15,7 @@ All results are streamed live to a React monitoring dashboard through persistent
 ---
 SYSTEM ARCHITECTURE
   
-  ┌────────────────────────┐
-  │   GITHUB REPOSITORY    │◄────────────────────────────────────────┐
-  │ (Issue Ingress Opened) │                                         │
-  └───────────┬────────────┘                                         │ 5. Post Markdown Brief
-              │                                                      │    & Triage Labels
-              │ 1. Live Webhook Payload                              │    (PyGithub Client)
-              ▼                                                      │
-  ┌────────────────────────┐                                         │
-  │  NGROK SECURE TUNNEL   │                                         │
-  └───────────┬────────────┘                                         │
-              │                                                      │
-              │ 2. Port Forwarding (Localhost:8000)                  │
-              ▼                                                      │
-┌─────────────────────────────────────────────────────────────────┐  │
-│             FASTAPI BACKEND ROUTER (main.py)                    │  │
-│                                                                 │  │
-│  ┌─────────────────┐       ┌───────────────────────────────┐    │  │
-│  │ /webhook        │       │ /simulate (Frontend Trigger)  │    │  │
-│  └────────┬────────┘       └──────────────┬────────────────┘    │  │
-│           │                               │                     │  │
-│           └───────────────┬───────────────┘                     │  │
-│                           ▼                                     │  │
-│         ┌───────────────────────────────────┐                   │  │
-│         │ Context Engine Layer (agent.py)   │───────────────────┼──┘
-│         └─────────────────┬─────────────────┘                   │
-└───────────────────────────┼─────────────────────────────────────┘
-                            │
-                            │ 3. Pull File Tree via GitHub Contents API
-                            ▼
-           ┌──────────────────────────────────┐
-           │ NVIDIA NEMOTRON-3 SUPER 120B     │
-           │ (Context Grounded Reasoning)     │
-           └────────────────┬─────────────────┘
-                            │
-                            │ 4. Structured JSON Payload Stream
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│             REACT DASHBOARD FRONTEND (App.jsx)                  │
-│                                                                 │
-│  • Visualizes Inbound Signal Streams via Real-Time WebSockets   │
-│  • Tracks Triage Accuracy, Metric Latency, and Budget Overhead  │
-└─────────────────────────────────────────────────────────────────┘
-
+![RepoGuard Architecture](./assets/architecture.png)
 
 # ⚡ Core Features
 
